@@ -175,6 +175,5 @@ The data structures are still being developed, so the final EEPROM layout may ch
 
 * ESP32
 * C++
-* Arduino
 * I²C
 * AT24C256 / 24LC512 EEPROM

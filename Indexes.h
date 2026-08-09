@@ -1,9 +1,9 @@
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
-#include <vector>
-#include <cstdint>
+#ifndef INDEXES_H
+#define INDEXES_H
+
 #include <string>
-#include <iostream>
-std::vector<uint16_t> GetIndexAdresses(std::string Name, int NextPos);
+#include <vector>
+
+std::vector<std::string> GetIndexAdresses(std::string Name, int NextPos);
 
 #endif

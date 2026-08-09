@@ -1,11 +1,11 @@
 #include "Indexes.h"
 #include <string>
 #include <vector>
-int Current = 0;
+#include <iostream>
 void CreateIndex(int CurrentPos, std::string Website){
-std::vector<uint16_t> Addresses = GetIndexAdresses(Website, CurrentPos);	
-for (uint16_t Address : Addresses) {
-    std::cout << Address;
+std::vector<std::string> Addresses = GetIndexAdresses(Website, CurrentPos);	
+for (std::string Address : Addresses) {
+    std::cout << Address << std::endl;
 }
 }
 

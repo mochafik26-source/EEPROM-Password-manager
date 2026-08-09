@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-void makeIndex(int Status, std::string Name, int NextPos) {
-    int Position = NextPos * 128 + 64;
-
+#include "Indexes.h"
+#include <cstdint>
+#include <vector>
+std::vector<uint16_t> GetIndexAdresses(std::string Name, int NextPos) {
+    int Position = NextPos * 24 + 64;
+    std::vector<uint16_t> Addresses;
     // std::string StartIndex = std::to_string(Position);
     //StartIndex.insert(0, 4 - StartIndex.length(), '0');
     // int Index = std::stoi(StartIndex);
@@ -11,11 +14,11 @@ void makeIndex(int Status, std::string Name, int NextPos) {
         Position += 1;
         std::string StartIndex =  std::to_string(Position);
         StartIndex.insert(0,4 - StartIndex.length(), '0');
-        std::cout << "0x" << StartIndex << std::endl;
-
+    	Addresses.push_back(std::stoul(StartIndex, nullptr, 16));
+	std::cout << StartIndex;
     }
+    return Addresses;
 }
-
-int main() {
-    makeIndex(1, "Mohamed", 0);
+int main(){
+	GetIndexAdresses("git", 0);
 }

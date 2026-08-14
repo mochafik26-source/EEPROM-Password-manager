@@ -1,21 +1,26 @@
-#include <iostream>
-#include <string>
-#include <iomanip>
 #include "../include/Indexes.h"
-#include <cstdint>
-#include <sstream>
+#include <stdint.h>
+#include <string.h>
 
-uint16_t GetIndexAddresses(std::string Name, int NextPos)
+// Static buffer returned to callers. This avoids returning pointers to
+// stack-allocated arrays.
+static uint16_t AddressesStatic[100];
+uint8_t AddressCount = 0;
+
+uint16_t* GetIndexAddresses(const char* Name, int NextPos)
 {
-    uint16_t Addresses[100];
-    Addresses[0] = 0x0035;
+    AddressCount = 0;
+    // First address: marker/config location
+    AddressesStatic[AddressCount++] = {};
 
     int Position = NextPos * 24 + 64;
 
-    for (int i = 0; i < Name.length() + 2; i++) {
+    size_t len = strlen(Name);
+    for (size_t i = 0; i < len; i++) {
         Position += 1;
-        Addresses[i + 1] = static_cast<uint16_t>(Position);
+        if (AddressCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
+        AddressesStatic[AddressCount++] = (uint16_t)Position;
     }
 
-    return Addresses;
+    return AddressesStatic;
 }

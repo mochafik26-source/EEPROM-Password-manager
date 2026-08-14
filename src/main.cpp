@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "./Indexes.cpp"
+#include "../include/Indexes.h"
 #include <Arduino.h>
 
 #define EEPROM_ADDRR 0x50
@@ -17,7 +17,7 @@ void writeEEPROM(byte device, unsigned int address, byte data) {
 }
 
 void WriteOnAddr(
-    unsigned int Addresses[],
+    uint16_t Addresses[],
     const char Values[]
 ) {
   
@@ -41,11 +41,10 @@ void WriteOnAddr(
 void setup() {
     Wire.begin();
 
-    unsigned int Addresses[100];
 
     auto addresses = GetIndexAddresses("Github", 0);
 
-    WriteOnAddr(Addresses, "Github");
+    WriteOnAddr(addresses, "Github");
 }
 
 void loop() {

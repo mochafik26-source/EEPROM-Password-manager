@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include "../include/Indexes.h"
 #include <Arduino.h>
+#include "../include/WriteIndex.h"
 
 #define EEPROM_ADDRR 0x50
 
@@ -20,8 +21,8 @@ void WriteOnAddr(
     uint16_t Addresses[],
     const char Values[]
 ) {
-  
-    // Mark EEPROM as configured
+    Wire.begin();
+    // Mark EEPROM as Taken
     writeEEPROM(EEPROM_ADDRR, Addresses[0], 1);
 
     // Write values starting at Addresses[1]
@@ -38,14 +39,3 @@ void WriteOnAddr(
     }
 }
 
-void setup() {
-    Wire.begin();
-
-
-    auto addresses = GetIndexAddresses("Github", 0);
-
-    WriteOnAddr(addresses, "Github");
-}
-
-void loop() {
-}

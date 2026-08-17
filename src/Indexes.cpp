@@ -1,4 +1,5 @@
 #include "../include/Indexes.h"
+#include <ostream>
 #include <stdint.h>
 #include <string.h>
 #include <iostream>
@@ -6,12 +7,16 @@
 // stack-allocated arrays.
 static uint16_t AddressesStatic[100];
 static uint16_t LoginAddresses[100];
+static uint16_t PassAddresses[100];
 uint8_t AddressCount = 0;
 uint8_t LoginCount = 0;
-uint16_t* GetIndexAddresses(const char* Name, int Pos,const char* Login, const char* Password)
+uint8_t PassCount = 0;
+
+IndexResult GetIndexAddresses(const char* Name, int Pos,const char* Login, const char* Password)
 {
     AddressCount = 0;
     LoginCount = 0;
+    PassCount = 0;
     // First address: marker/config location
     AddressesStatic[AddressCount++] = {};
 
@@ -28,18 +33,33 @@ uint16_t* GetIndexAddresses(const char* Name, int Pos,const char* Login, const c
 
     size_t Loginlen = strlen(Login);
     for (size_t i = 0; i < Loginlen; i++) {
-        if (LoginCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
+        RecordPosition += 1;
+        if (LoginCount >= (sizeof(LoginAddresses)/sizeof(LoginAddresses[0]))) break;
         LoginAddresses[LoginCount++] = (uint16_t)RecordPosition;
     }
 
-return LoginAddresses;
+
+    size_t Passlen = strlen(Password);
+    for (size_t i = 0; i < Passlen; i++) {
+        PassIndex += 1;
+        if (PassCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
+        PassAddresses[PassCount++] = (uint16_t)PassIndex;
+    }
+
+return {PassAddresses,LoginAddresses,AddressesStatic,LoginCount, PassCount};
 }
 
 int main(){
   auto Logins = GetIndexAddresses("Github", 0, "Mohamed", "1234d");
-
-  for (int i = 0; i < AddressCount; i++) {
-        std::cout << Logins[i] << std::endl;
+  std::cout << "Passwords";
+  for (int i = 0; i < Logins.Passcount; i++) {
+        std::cout << Logins.PassAddresses[i] << std::endl;
     }
+
+  std::cout << "Logins";
+  for (int i = 0; i < Logins.Logincount; i++) {
+        std::cout << Logins.LoginAddresses[i] << std::endl;
+    }
+
   return 0;
 }

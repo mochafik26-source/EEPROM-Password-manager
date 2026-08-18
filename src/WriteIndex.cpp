@@ -2,20 +2,10 @@
 #include "../include/Indexes.h"
 #include <Arduino.h>
 #include "../include/WriteIndex.h"
-
+#include "../include/Write.h"
 #define EEPROM_ADDRR 0x50
 
-void writeEEPROM(byte device, unsigned int address, byte data) {
-    Wire.beginTransmission(device);
 
-    Wire.write(address >> 8);
-    Wire.write(address & 0xFF);
-    Wire.write(data);
-
-    Wire.endTransmission();
-
-    delay(5);
-}
 
 void WriteOnAddr(
     uint16_t Addresses[],

@@ -1,8 +1,8 @@
 #include "../include/Indexes.h"
-#include <ostream>
 #include <stdint.h>
 #include <string.h>
-#include <iostream>
+#include "../include/ReadAddress.h"
+#include "../include/Write.h"
 // Static buffer returned to callers. This avoids returning pointers to
 // stack-allocated arrays.
 static uint16_t AddressesStatic[100];
@@ -12,8 +12,10 @@ uint8_t AddressCount = 0;
 uint8_t LoginCount = 0;
 uint8_t PassCount = 0;
 
-IndexResult GetIndexAddresses(const char* Name, int Pos,const char* Login, const char* Password)
+IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password)
 {
+    // the address the has length.
+    int Pos = readEEPROM(0x0001);
     AddressCount = 0;
     LoginCount = 0;
     PassCount = 0;
@@ -45,21 +47,8 @@ IndexResult GetIndexAddresses(const char* Name, int Pos,const char* Login, const
         if (PassCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
         PassAddresses[PassCount++] = (uint16_t)PassIndex;
     }
-
+writeEEPROM(0x50, 0x0001, Pos+1);
 return {PassAddresses,LoginAddresses,AddressesStatic,LoginCount, PassCount};
 }
 
-int main(){
-  auto Logins = GetIndexAddresses("Github", 0, "Mohamed", "1234d");
-  std::cout << "Passwords";
-  for (int i = 0; i < Logins.Passcount; i++) {
-        std::cout << Logins.PassAddresses[i] << std::endl;
-    }
 
-  std::cout << "Logins";
-  for (int i = 0; i < Logins.Logincount; i++) {
-        std::cout << Logins.LoginAddresses[i] << std::endl;
-    }
-
-  return 0;
-}

@@ -4,11 +4,11 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-void writeEEPROM(byte device, unsigned int address, byte data);
 
 void WriteOnAddr(
     uint16_t Addresses[],
-    const char Values[]
+    const char Values[],
+    uint8_t Position
 );
 
 #endif

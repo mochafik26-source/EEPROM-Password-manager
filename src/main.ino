@@ -4,13 +4,12 @@
 #include "../include/WriteRecords.h"
 void setup() {
     Serial.begin(9600);
-    auto addresses = GetIndexAddresses("youtube", 0, "Mohamed", "Evo");
-
-    WriteOnAddr(addresses.IndexAddresses, "youtube");
+    auto addresses = GetIndexAddresses("github", "Mohamed", "Evo");
+    Serial.println("got the addresses");
+    WriteOnAddr(addresses.IndexAddresses, "github", addresses.Pos);
     delay(500);
     writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "MohamedEvo", addresses.Logincount, addresses.Passcount);
 
-    delay(1000);
     Serial.println("Data written to EEPROM successfully.");
     
 }

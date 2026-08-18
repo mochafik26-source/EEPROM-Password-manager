@@ -4,6 +4,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-byte readEEPROM(unsigned int address)
+byte readEEPROM(uint16_t address);
 
 #endif

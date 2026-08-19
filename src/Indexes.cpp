@@ -15,20 +15,20 @@ uint8_t Pos = 0;
 IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password)
 {
     Wire.begin();
+    writeEEPROM(0x50, 0x0001, 0); // Initialize position if not already set
     Pos = readEEPROM(0x0001);
 
     AddressCount = 0;
     LoginCount = 0;
     PassCount = 0;
     // First address: marker/config location
-    AddressesStatic[AddressCount++] = {};
 
     int IndexPosition = Pos * 24 + 64;
     int RecordPosition = Pos * 128 + 5040 + 64;
     int PassIndex = RecordPosition + 64;
 
     size_t len = strlen(Name);
-    for (size_t i = 0; i < len; i++) {
+    for (size_t i = 0; i < len+1; i++) {
         IndexPosition += 1;
         if (AddressCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
         AddressesStatic[AddressCount++] = (uint16_t)IndexPosition;

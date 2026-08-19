@@ -9,7 +9,7 @@ void setup() {
         Serial.print("Login Address ");
         Serial.print(i);
         Serial.print(": ");
-        Serial.println(addresses.LoginAddresses[i], HEX);
+        Serial.println(addresses.IndexAddresses[i], HEX);
     }
     WriteOnAddr(addresses.IndexAddresses, "github", addresses.Pos);
     delay(500);

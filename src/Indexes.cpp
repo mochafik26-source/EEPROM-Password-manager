@@ -16,10 +16,7 @@ IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Pa
 {
     Wire.begin();
     Pos = readEEPROM(0x0001);
-    if (Pos >= 100) {
-        Pos = 0; // Reset position if it exceeds the maximum allowed
-        writeEEPROM(0x50, 0x0001, 0);
-    }
+
     AddressCount = 0;
     LoginCount = 0;
     PassCount = 0;
@@ -38,7 +35,7 @@ IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Pa
     }
 
     size_t Loginlen = strlen(Login);
-    for (size_t i = 0; i < Loginlen; i++) {
+    for (size_t i = 0; i < Loginlen + 1; i++) {
         RecordPosition += 1;
         if (LoginCount >= (sizeof(LoginAddresses)/sizeof(LoginAddresses[0]))) break;
         LoginAddresses[LoginCount++] = (uint16_t)RecordPosition;
@@ -46,7 +43,7 @@ IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Pa
 
 
     size_t Passlen = strlen(Password);
-    for (size_t i = 0; i < Passlen; i++) {
+    for (size_t i = 0; i < Passlen + 1; i++) {
         PassIndex += 1;
         if (PassCount >= (sizeof(AddressesStatic)/sizeof(AddressesStatic[0]))) break;
         PassAddresses[PassCount++] = (uint16_t)PassIndex;

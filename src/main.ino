@@ -11,7 +11,7 @@ void setup() {
    // writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "MohamedEvo", addresses.Logincount, addresses.Passcount);
 
     //Serial.println("Data written to EEPROM successfully.");
-   Serial.println(Searching("git"));
+   Serial.println(Searching("git hub"));
 }
 void loop() {
 }

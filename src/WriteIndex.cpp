@@ -14,7 +14,7 @@ void WriteOnAddr(
     uint8_t Position
 ) {
     Wire.begin();
-    // Mark EEPROM as Taken
+    // set the position of the record.
     writeEEPROM(EEPROM_ADDRR, Addresses[0], Position);
 
     // Write values starting at Addresses[1]

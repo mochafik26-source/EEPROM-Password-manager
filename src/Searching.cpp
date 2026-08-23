@@ -11,19 +11,22 @@ String Searching(const String Name){
   for (int i = min; i < max; i += recordSize) {
 
         word = "";
-
         for (int s = i + 1; s < i + recordSize; s++) {
 
             byte letter = readEEPROM((uint16_t)s);
 
-            if (letter == 0 && !(letter > 32)) {
+            if (letter == 0 || !(letter > 32)) {
                 continue;
             }
             if(isAlpha((char)letter)){
             word += (char)letter;
             }
+            if (word == Name) {
+            return "Found at address: " + String(i);
+            break;
         }
-        return word;
+        }
+        
 
         
     }

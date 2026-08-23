@@ -15,8 +15,7 @@ uint8_t Pos = 0;
 IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password)
 {
     Wire.begin();
-    writeEEPROM(0x50, 0x0001, 0); // Initialize position if not already set
-    Pos = readEEPROM(0x0001);
+    Pos = 3;
 
     AddressCount = 0;
     LoginCount = 0;

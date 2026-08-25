@@ -22,7 +22,7 @@ String Searching(const String Name){
             word += (char)letter;
             }
             if (word == Name) {
-            return "Found at address: " + String(i);
+            return String(i);
             break;
         }
         }

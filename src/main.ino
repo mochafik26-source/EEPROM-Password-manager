@@ -11,7 +11,8 @@ void setup() {
    // writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "MohamedEvo", addresses.Logincount, addresses.Passcount);
 
     //Serial.println("Data written to EEPROM successfully.");
-   Serial.println(Searching("chatgpt"));
+   String RecordsPos = Searching("github");
+   
 }
 void loop() {
 }

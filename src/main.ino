@@ -14,7 +14,7 @@ void setup() {
     //Serial.println("Data written to EEPROM successfully.");
    //String RecordsPos = Searching("chatgpt");
    //Serial.println("Record Position: " + RecordsPos);
-    auto results = ReadingRecord(3);
+    auto results = ReadingRecord(0);
     Serial.println(results);
 }
 void loop() {

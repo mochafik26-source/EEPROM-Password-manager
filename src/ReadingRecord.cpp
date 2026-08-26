@@ -1,11 +1,9 @@
-#include <iostream>
-#include <list>
 #include <Arduino.h>
 #include <Wire.h>
 #include "../include/ReadAddress.h"
-#include "../include/ReadingRecords.h"
-std::list<std::string> ReadingRecord(int startAddress) {
-    std::list<std::string> records;
+#include "../include/ReadingRecord.h"
+std::list<Record> ReadingRecord(int startAddress) {
+    std::list<Record> records;
     const int Recordsize = 128;
     const int starting = 6104;
 
@@ -16,7 +14,7 @@ std::list<std::string> ReadingRecord(int startAddress) {
       byte loginlen = readEEPROM(i);
       byte passlen = readEEPROM(i +64);
       for(int s = i + 1; s < i + loginlen; s++){
-        byte letter = readEEPROM((uin16_t)s);
+        byte letter = readEEPROM((uint16_t)s);
         if(letter >= 32){
         login = login + (char)letter;  
         }
@@ -33,8 +31,8 @@ std::list<std::string> ReadingRecord(int startAddress) {
           break;
         }
       }
-      records[0] = login;
-      records[1] = pass;
+      records.push_back(login.c_str());
+      records.push_back(pass.c_str());
 
     }
 

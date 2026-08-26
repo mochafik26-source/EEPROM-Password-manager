@@ -1,12 +1,14 @@
+#ifndef READADD_EEPROM_H
 #define READADD_EEPROM_H
 
-#include <iosteam>
-#include <list>
+
 #include <Arduino.h>
 #include <Wire.h>
 #include "../include/ReadAddress.h"
-#include "../include/ReadingRedords.h"
+struct Record {
+    std::string login;
+    std::string password;
+};
 
-std::list<std::string> ReadRecord(int startAddress)
-
+std::list<Record> ReadingRecord(int startAddress);
 #endif

@@ -3,6 +3,7 @@
 #include "../include/WriteIndex.h"
 #include "../include/WriteRecords.h"
 #include "../include/Searching.h"
+#include "../include/ReadingRecord.h"
 void setup() {
     Serial.begin(9600);
      //auto addresses = GetIndexAddresses("Mohamed", "Mohamed", "Evo");
@@ -11,8 +12,9 @@ void setup() {
    // writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "MohamedEvo", addresses.Logincount, addresses.Passcount);
 
     //Serial.println("Data written to EEPROM successfully.");
-   String RecordsPos = Searching("github");
-   
+   //String RecordsPos = Searching("github");
+    std::list<std::string> results = ReadingRecord(1);
+    Serial.println(results.front());
 }
 void loop() {
 }

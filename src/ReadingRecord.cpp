@@ -1,40 +1,38 @@
+#include "../include/ReadingRecord.h"
 #include <Arduino.h>
 #include <Wire.h>
 #include "../include/ReadAddress.h"
-#include "../include/ReadingRecord.h"
-std::list<Record> ReadingRecord(int startAddress) {
-    std::list<Record> records;
+#include <stdint.h>
+#include <stddef.h>
+String ReadingRecord(int startAddress) {
+  Wire.begin();
     const int Recordsize = 128;
-    const int starting = 6104;
-
+    const int starting = 5105;
+    String login = "";
+ 
     for(int i = starting; i < 32000; i+= Recordsize){
-      records.clear();
-      String login = "";
-      String pass = "";
+      login = "";
       byte loginlen = readEEPROM(i);
-      byte passlen = readEEPROM(i +64);
-      for(int s = i + 1; s < i + loginlen; s++){
+      // byte passlen = readEEPROM(i +64);
+      for(int s = i + 1; s < i + loginlen + 1; s++){
         byte letter = readEEPROM((uint16_t)s);
-        if(letter >= 32){
-        login = login + (char)letter;  
+        if(letter > 32){
+        login += (char)letter; 
         }
-        else{
-          break;
-        }
+        
       }
-      for(int f = i + 1 + 64; f < i + passlen + 64; f++){
-        byte letter = readEEPROM((uint16_t)f);
-        if(letter >= 32){
-          pass = pass + (char)letter;
-        }
-        else{
-          break;
-        }
-      }
-      records.push_back(login.c_str());
-      records.push_back(pass.c_str());
+      // for(int f = i + 1 + 64; f < i + passlen + 64; f++){
+      //   byte letter = readEEPROM((uint16_t)f);
+      //   if(letter >= 32){
+      //     password = password + (char)letter;
+      //   }
+      //   else{
+      //     break;
+      //   }
+      // }
+      
 
     }
 
-    return records;
-}
+    return login;
+  }

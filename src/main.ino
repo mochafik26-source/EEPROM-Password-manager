@@ -7,14 +7,15 @@
 void setup() {
     Serial.begin(9600);
      //auto addresses = GetIndexAddresses("Mohamed", "Mohamed", "Evo");
-     //WriteOnAddr(addresses.IndexAddresses, "chatgpt", addresses.Pos);
-    ///delay(500);
+     // WriteOnAddr(addresses.IndexAddresses, "chatgpt", addresses.Pos);
+    //delay(500);
    // writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "MohamedEvo", addresses.Logincount, addresses.Passcount);
 
     //Serial.println("Data written to EEPROM successfully.");
-   //String RecordsPos = Searching("github");
-    std::list<std::string> results = ReadingRecord(1);
-    Serial.println(results.front());
+   //String RecordsPos = Searching("chatgpt");
+   //Serial.println("Record Position: " + RecordsPos);
+    auto results = ReadingRecord(3);
+    Serial.println(results);
 }
 void loop() {
 }

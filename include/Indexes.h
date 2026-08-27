@@ -10,6 +10,7 @@ struct IndexResult {
     uint16_t* IndexAddresses;
     uint8_t Logincount;
     uint8_t Passcount;
+
     uint8_t Pos;
 };
 IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password);

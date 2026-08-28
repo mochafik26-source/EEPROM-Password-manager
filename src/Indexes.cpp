@@ -15,7 +15,7 @@ uint8_t Pos = 0;
 IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password)
 {
     Wire.begin();
-    Pos = 3;
+    Pos = 2;
 
     AddressCount = 0;
     LoginCount = 0;

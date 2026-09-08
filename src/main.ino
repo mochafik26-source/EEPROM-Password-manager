@@ -23,9 +23,15 @@ void setup() {
 }
 void loop() {
     if (Serial.available() > 0) {
-        String data = Serial.readStringUntil('\n');
-        data.trim();
+    String data = Serial.readStringUntil('\n');
+    data.trim();
 
-        
-    }
+    int separator = data.indexOf(',');
+
+    String name = data.substring(0, separator);
+    String login = data.substring(separator + 1);
+
+    Serial.println("Name: " + name);
+    Serial.println("Login: " + login);
+}
 }

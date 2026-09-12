@@ -2,7 +2,7 @@
 #include "../include/ReadAddress.h"
 #include "../include/Searching.h"
 #include <Arduino.h>
-String Searching(const String Name){
+int Searching(const String Name){
   Wire.begin();
   const int max = 5040;
   const int min = 64;
@@ -22,7 +22,7 @@ String Searching(const String Name){
             word += (char)letter;
             }
             if (word == Name) {
-            return String(i);
+            return (i - 64) / recordSize; // Return the index of the record
             break;
         }
         }
@@ -31,5 +31,5 @@ String Searching(const String Name){
         
     }
 
-    return "not found";
+    return 0;
 }

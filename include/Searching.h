@@ -3,6 +3,6 @@
 #include <Wire.h>
 #include <Arduino.h>
 #include "../include/ReadAddress.h"
-String Searching(const String Name);
+int Searching(const String Name);
 
 #endif

@@ -18,7 +18,7 @@ void setup() {
     //Serial.println("Data written to EEPROM successfully.");
    //String RecordsPos = Searching("reddit");
    //Serial.println("Record Position: " + RecordsPos);
-    auto results = ReadingRecord(2);
+    auto results = ReadingRecord(3);
     Serial.println(results);
 }
 void loop() {
@@ -39,7 +39,20 @@ void loop() {
         command = command + data[i];
       }
     }
-    Serial.println(commands[0]);
-    
+        if(commands[0] == "add"){
+          auto addresses = GetIndexAddresses(commands[1].c_str(), commands[2].c_str(), commands[3].c_str());
+          WriteOnAddr(addresses.IndexAddresses, commands[1].c_str(), addresses.Pos);
+          delay(500);
+          String namepass = commands[2] + commands[3];
+          writeRecords(addresses.LoginAddresses, addresses.PassAddresses,namepass.c_str() , addresses.Logincount, addresses.Passcount);
+
+          Serial.println("Data written to EEPROM successfully.");
+        }
+        else if(commands[0] == "read"){
+            int RecordsPos = Searching(commands[1]);
+            auto results = ReadingRecord(RecordsPos);
+            Serial.println(results);
+        }
+        
 }
 }

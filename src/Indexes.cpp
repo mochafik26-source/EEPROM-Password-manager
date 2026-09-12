@@ -15,7 +15,7 @@ uint8_t Pos = 0;
 IndexResult GetIndexAddresses(const char* Name,const char* Login, const char* Password)
 {
     Wire.begin();
-    Pos = 2;
+    Pos = readEEPROM(0x0001); // Read the current position from EEPROM
 
     AddressCount = 0;
     LoginCount = 0;

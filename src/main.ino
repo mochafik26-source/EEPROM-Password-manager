@@ -25,8 +25,21 @@ void loop() {
     if (Serial.available() > 0) {
     String data = Serial.readStringUntil('\n');
     data.trim();
-
+    String commands[4];
     Serial.println(data);
+    String command = "";
+    int f = 0;
+    for(int i = 0; i < data.length(); i++){
+      if(data[i] == '|'){
+        commands[f] = command;
+        command = "";
+        f++;
+      }
+      else{
+        command = command + data[i];
+      }
+    }
+    Serial.println(commands[0]);
     
 }
 }

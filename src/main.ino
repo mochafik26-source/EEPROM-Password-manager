@@ -4,7 +4,7 @@
 #include "../include/WriteRecords.h"
 #include "../include/Searching.h"
 #include "../include/ReadingRecord.h"
-
+#include "../include/Delete.h"
 void setup() {
     String  Name = "";
     String  Login = "";
@@ -53,6 +53,12 @@ void loop() {
             auto results = ReadingRecord(RecordsPos);
             Serial.println(results);
         }
+        else if(commands[0] == "delete"){
+          //int RecordsPos = Searching(commands[1])
+          Deleting(3);
+          Serial.println("deleted");
+          }
+
         
 }
 }

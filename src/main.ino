@@ -54,8 +54,8 @@ void loop() {
             Serial.println(results);
         }
         else if(commands[0] == "delete"){
-          //int RecordsPos = Searching(commands[1])
-          Deleting(3);
+          int RecordsPos = Searching(commands[1]);
+          Deleting(RecordsPos);
           Serial.println("deleted");
           }
 

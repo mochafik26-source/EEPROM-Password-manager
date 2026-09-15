@@ -50,8 +50,13 @@ void loop() {
         }
         else if(commands[0] == "read"){
             int RecordsPos = Searching(commands[1]);
-            auto results = ReadingRecord(RecordsPos);
-            Serial.println(results);
+            if (RecordsPos == -1) {
+                Serial.println("Record not found");
+            } else {
+                auto results = ReadingRecord(RecordsPos);
+                Serial.println(results);
+            }
+            
         }
         else if(commands[0] == "delete"){
           int RecordsPos = Searching(commands[1]);

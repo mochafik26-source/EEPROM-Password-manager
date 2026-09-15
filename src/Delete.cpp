@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "../include/Write.h"
 #include "../include/WriteRecords.h"
+#include "../include/Delete.h"
 #define EEPROM_ADDRR 0x50
 void Deleting(const int Index){
   const int recordsize = 128;

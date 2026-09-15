@@ -31,5 +31,5 @@ int Searching(const String Name){
         
     }
 
-    return 0;
+    return -1; // Return -1 if the record is not found
 }

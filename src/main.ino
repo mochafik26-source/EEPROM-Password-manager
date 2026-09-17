@@ -5,21 +5,10 @@
 #include "../include/Searching.h"
 #include "../include/ReadingRecord.h"
 #include "../include/Delete.h"
+#include "../include/Reset.h"
 void setup() {
-    String  Name = "";
-    String  Login = "";
-    String  Password = "";
-    Serial.begin(9600);
-     //auto addresses = GetIndexAddresses("reddit", "Evolution", "Evo");
-     //WriteOnAddr(addresses.IndexAddresses, "reddit", addresses.Pos);
-    //delay(500);
-   //writeRecords(addresses.LoginAddresses, addresses.PassAddresses, "EvolutionEvo", addresses.Logincount, addresses.Passcount);
 
-    //Serial.println("Data written to EEPROM successfully.");
-   //String RecordsPos = Searching("reddit");
-   //Serial.println("Record Position: " + RecordsPos);
-    auto results = ReadingRecord(3);
-    Serial.println(results);
+    Serial.begin(9600);
 }
 void loop() {
     if (Serial.available() > 0) {
@@ -47,14 +36,20 @@ void loop() {
           writeRecords(addresses.LoginAddresses, addresses.PassAddresses,namepass.c_str() , addresses.Logincount, addresses.Passcount);
 
           Serial.println("Data written to EEPROM successfully.");
+          Serial.println("done");
+
+          
         }
         else if(commands[0] == "read"){
             int RecordsPos = Searching(commands[1]);
             if (RecordsPos == -1) {
                 Serial.println("Record not found");
+                Serial.println("done");
+
             } else {
                 auto results = ReadingRecord(RecordsPos);
                 Serial.println(results);
+                Serial.println("done");
             }
             
         }
@@ -62,6 +57,13 @@ void loop() {
           int RecordsPos = Searching(commands[1]);
           Deleting(RecordsPos);
           Serial.println("deleted");
+          Serial.println("done");
+          }
+          else if(commands[0] == "reset"){
+            Reset();
+            Serial.println("EEPROM reset successfully.");
+            Serial.println("done");
+          
           }
 
         

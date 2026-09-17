@@ -4,7 +4,7 @@
 #include "../include/Reset.h"
 #define EEPROM_ADDRR 0x50
 void Reset(){
-    const int MemorySize = 32000;
+    const int MemorySize = 31999;
     Wire.begin();
     for(int i = 0; i < MemorySize; i++){
         writeEEPROM(

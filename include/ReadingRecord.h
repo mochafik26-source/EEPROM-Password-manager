@@ -11,5 +11,5 @@ struct Record {
     String pass;
 };
 
-String ReadingRecord(int startAddress);
+Record ReadingRecord(int startAddress);
 #endif

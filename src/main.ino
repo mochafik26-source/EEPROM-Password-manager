@@ -6,16 +6,17 @@
 #include "../include/ReadingRecord.h"
 #include "../include/Delete.h"
 #include "../include/Reset.h"
+#include "../include/ReadAddress.h"
+#include <Wire.h>
 void setup() {
-
     Serial.begin(9600);
+
 }
 void loop() {
     if (Serial.available() > 0) {
     String data = Serial.readStringUntil('\n');
     data.trim();
     String commands[4];
-    Serial.println(data);
     String command = "";
     int f = 0;
     for(int i = 0; i < data.length(); i++){
@@ -48,7 +49,8 @@ void loop() {
 
             } else {
                 auto results = ReadingRecord(RecordsPos);
-                Serial.println(results);
+                    Serial.println(" Login:" + results.log);
+                    Serial.println(" Password:" + results.pass);
                 Serial.println("done");
             }
             
@@ -64,6 +66,10 @@ void loop() {
             Serial.println("EEPROM reset successfully.");
             Serial.println("done");
           
+          }
+          else{
+            Serial.println("Invalid command");
+            Serial.println("done");
           }
 
         

@@ -5,6 +5,8 @@ A password manager project built around an **Arduino** and an external **I²C EE
 The Arduino handles communication with the EEPROM and manages the stored data. During development, the Arduino is controlled through the **Arduino Serial Monitor**.
 
 A separate **Go CLI application built with Cobra** is also being developed to provide a command-line interface for communicating with the Arduino.
+<img width="813" height="429" alt="image" src="https://github.com/user-attachments/assets/29b175ed-2160-4061-9c3f-3ed3b3762917" />
+
 
 ## Architecture
 
